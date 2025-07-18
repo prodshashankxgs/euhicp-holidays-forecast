@@ -1,0 +1,20 @@
+EU HICP Package Holidays Price Forecast
+
+Objective:
+Forecast the seasonally adjusted month-on-month percentage change (MoM% SA) in the HICP index for package holidays in July 2025.
+
+Scope:
+Explore seasonal price spikes and cross-country divergence. Use both EU-wide (CP96EAMM Index) and national series like Germany (CP96DEMM Index) to understand what drives summer inflation.
+
+Guiding Question:
+How can I forecast MoM% SA for this highly seasonal HICP component? Could country-specific trends, travel indicators, or booking data lead to a better July projection.
+
+Key Tickers:
+- EU Package Holidays (NSA): CP96EAMM Index
+- Germany Package Holidays (NSA): CP96DEMM Index
+- (SA version need to be constructed manually)
+
+Starter Resources:
+- ec.europa.eu/eurostat
+- fred.stlouisfed.org
+- ecb.europa.eu

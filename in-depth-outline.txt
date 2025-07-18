@@ -1,0 +1,97 @@
+## Data Collection Strategy
+
+**Primary Data Sources:**
+- **FRED API**: Pull the key HICP indices (CP96EAMM, CP96DEMM) and related economic indicators
+- **BLS API**: Complement with US travel/leisure data for comparative analysis
+- **Eurostat**: Direct API calls for additional EU tourism statistics
+- **ECB**: Monetary policy indicators that might influence travel spending
+
+**Secondary Indicators to Consider:**
+- Air passenger traffic data
+- Hotel occupancy rates
+- Consumer confidence indices
+- Exchange rates (EUR/USD, EUR/GBP)
+- Oil prices (travel cost proxy)
+- GDP growth rates for key EU countries
+
+## Polars-Centric Data Pipeline
+
+**Data Architecture:**
+- Use Polars lazy evaluation for efficient data processing across multiple time series
+- Create a unified schema for all HICP series with country identifiers
+- Implement rolling window calculations for seasonal adjustments
+- Build a feature store with lagged variables and derived indicators
+
+**Key Polars Advantages:**
+- Fast time series operations for seasonal decomposition
+- Efficient cross-country joins and comparisons
+- Memory-efficient handling of multiple vintage datasets
+- Superior performance for feature engineering at scale
+
+## Analytical Framework
+
+**Seasonal Adjustment Approach:**
+1. **X-13ARIMA-SEATS equivalent** using statsmodels + Polars
+2. **STL decomposition** for trend/seasonal/residual components
+3. **Custom seasonal factors** based on booking patterns and school holidays
+4. **Cross-country seasonal correlation analysis**
+
+**Forecasting Methodology:**
+- **Ensemble approach**: Combine multiple models for robustness
+- **ARIMA/SARIMA**: Classical time series for baseline
+- **Machine learning**: Random Forest/XGBoost with engineered features
+- **Cross-country spillover models**: VAR/Panel VAR for EU dynamics
+- **Regime-switching models**: Account for crisis periods (COVID, economic shocks)
+
+## Feature Engineering Strategy
+
+**Temporal Features:**
+- Month/quarter dummies for seasonality
+- School holiday calendars across EU countries
+- Weather indices (temperature, sunshine hours)
+- Economic calendar events (ECB meetings, policy announcements)
+
+**Cross-Country Features:**
+- Relative price differentials between countries
+- Tourism flow matrices (German tourists to Spain, etc.)
+- Economic convergence indicators
+- Currency volatility measures
+
+## Visualization and Analysis Plan
+
+**Plotly Dashboard Components:**
+- **Interactive time series plots** with country comparisons
+- **Seasonal heatmaps** showing MoM patterns by country/year
+- **Correlation matrices** between countries and leading indicators
+- **Forecast confidence intervals** with scenario analysis
+- **Residual diagnostics** and model performance metrics
+
+**Jupyter Notebook Structure:**
+1. **Data Collection & Cleaning** (FRED/BLS API integration)
+2. **Exploratory Data Analysis** (Polars + Plotly)
+3. **Seasonal Adjustment** (Custom implementation)
+4. **Feature Engineering** (Cross-country indicators)
+5. **Model Development** (Multiple approaches)
+6. **Forecasting & Validation** (July 2025 projection)
+7. **Sensitivity Analysis** (Scenario testing)
+
+## Model Validation Approach
+
+**Backtesting Strategy:**
+- **Out-of-sample validation**: Hold out 2023-2024 data
+- **Rolling window forecasts**: Simulate real-time forecasting
+- **Cross-country validation**: Train on some countries, test on others
+- **Seasonal robustness tests**: Focus on summer months specifically
+
+## Key Challenges to Address
+
+**Data Quality Issues:**
+- Missing data imputation using cross-country relationships
+- Handling structural breaks (COVID, Brexit, energy crises)
+- Dealing with different seasonal patterns across countries
+
+**Methodological Considerations:**
+- Choosing appropriate seasonal adjustment parameters
+- Balancing model complexity vs. interpretability
+- Incorporating expert judgment and market intelligence
+- Handling the high volatility of package holiday prices
